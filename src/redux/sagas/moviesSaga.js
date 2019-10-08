@@ -2,8 +2,8 @@ import { call, put, takeEvery } from "redux-saga/effects";
 import { setMovies } from "../actions";
 import { getMovies } from "../api";
 
-function* handleMovieLoad(payload) {
-  const movies = yield call(getMovies, payload.value);
+function* handleMovieLoad(action) {
+  const movies = yield call(getMovies, action.value);
   yield put(setMovies(movies));
 }
 

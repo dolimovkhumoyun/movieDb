@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
-import { Card, Col, Row } from "antd";
+import { Card, Col, Row, Rate, Pagination } from "antd";
+import StartRatings from "react-star-ratings";
 import _ from "lodash";
 // import { getMovies } from "../../redux/api";
 
@@ -10,31 +11,30 @@ class Movies extends Component {
   data = [];
 
   renderGenreName(genre_ids) {
-    const genres = this.props.genres;
-    if (!_.isEmpty(genres)) {
-      const genre_name = genre_ids.map(ids => {
-        return _.filter(genres, { id: ids });
+    let genres = [];
+    if (this.props.genres.length !== 0) {
+      genre_ids.map(id => {
+        const genre = _.find(this.props.genres, { id: id });
+        genres.push(genre);
       });
-      const genre_names = genre_name.map(n => {
-        return n.name + " ";
-      });
-      // console.log(genre_names);
+      return genres[0].name;
     }
-    // return;
   }
 
   render() {
-    const { movies, genres } = this.props;
+    const { movies, genres, onClick } = this.props;
+    const results = movies.results !== undefined ? movies.results : [];
     return (
       <React.Fragment>
         <div className="container-fluid movie-cards">
           {" "}
           <Row gutter={16} className="movie-row">
-            {movies.map(movie => (
+            {results.map(movie => (
               <Col span={6}>
                 <Card
                   hoverable
                   className="ml-auto card"
+                  onClick={() => onClick(movie.id)}
                   cover={
                     <img
                       alt="example"
@@ -43,14 +43,35 @@ class Movies extends Component {
                   }
                 >
                   <Meta
-                    title={movie.original_title}
+                    title={movie.title}
                     description={this.renderGenreName(movie.genre_ids)}
                   />
+                  <span>
+                    <Rate disabled value={movie.vote_average / 2} />
+                    {movie.vote_average ? (
+                      <span className="ant-rate-text">
+                        {" "}
+                        {movie.vote_average}
+                      </span>
+                    ) : (
+                      ""
+                    )}
+                  </span>
                 </Card>
               </Col>
             ))}
           </Row>
         </div>
+        <Row>
+          <Col span={8} offset={10} align={"bottom"} className="mt-4 mb-4">
+            {" "}
+            <Pagination
+              current={this.props.currentPage}
+              total={movies.total_pages}
+              onChange={this.props.onPageClick}
+            />
+          </Col>
+        </Row>
       </React.Fragment>
     );
   }

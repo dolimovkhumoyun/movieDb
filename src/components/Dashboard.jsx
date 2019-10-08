@@ -1,44 +1,75 @@
 import React, { Component } from "react";
 import SearchBar from "antd/lib/input/Search";
+import Movies from "./common/Movies";
+
+import _ from "lodash";
+
 import { connect } from "react-redux";
+import { loadMovies, loadGenres, getMovie } from "../redux/actions";
 
 import "antd/dist/antd.css";
 import "../assets/style/style.scss";
-import Movies from "./common/Movies";
-import { loadMovies, loadGenres, emitLogin } from "../redux/actions";
+import { Pagination, Col, Row, Spin } from "antd";
 
 class Dashboard extends Component {
+  state = {
+    currentPage: 1
+  };
+
   componentDidMount() {
     this.props.loadMovies(1);
     this.props.loadGenres();
-    this.props.emitLogin("admin", "admin");
   }
+
+  onCardClick = movie_id => {
+    this.props.getMovie(movie_id);
+  };
+
+  onChange = page => {
+    console.log(page);
+    this.setState({ currentPage: page });
+    this.props.loadMovies(page);
+  };
 
   render() {
     const { movies, genre } = this.props;
+    const loaderVisibility = movies.results !== undefined ? false : true;
+
     return (
       <React.Fragment>
         <div className="">
           <div className="col-md-4 searchBar ">
             <SearchBar />
           </div>
-          <Movies movies={movies} genres={genre} />
+          {loaderVisibility ? (
+            <Spin
+              size="large"
+              style={{ marginLeft: "50`%", marginTop: "15%" }}
+            />
+          ) : (
+            <Movies
+              movies={movies}
+              genres={genre}
+              onClick={this.onCardClick}
+              onPageClick={this.onChange}
+              currentPage={this.state.currentPage}
+            />
+          )}
         </div>
       </React.Fragment>
     );
   }
 }
 
-const mapStateToProps = ({ movies, genre, login }) => ({
+const mapStateToProps = ({ movies, genre }) => ({
   movies,
-  genre,
-  login
+  genre
 });
 
 const mapDispatchToProps = dispatch => ({
-  loadMovies: page => dispatch(loadMovies(1)),
+  loadMovies: page => dispatch(loadMovies(page)),
   loadGenres: () => dispatch(loadGenres()),
-  emitLogin: (username, password) => dispatch(emitLogin(username, password))
+  getMovie: movie_id => dispatch(getMovie(movie_id))
 });
 
 export default connect(

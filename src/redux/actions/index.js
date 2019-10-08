@@ -1,4 +1,4 @@
-const loadMovies = (page = 1) => ({
+const loadMovies = page => ({
   type: "LOAD",
   value: page
 });
@@ -6,6 +6,16 @@ const loadMovies = (page = 1) => ({
 const setMovies = movies => ({
   type: "LOAD_SUCCESS",
   movies
+});
+
+const getMovie = movie_id => ({
+  type: "GET_MOVIE",
+  payload: movie_id
+});
+
+const setMovie = movie => ({
+  type: "SET_MOVIE",
+  payload: movie
 });
 
 const loadGenres = () => ({
@@ -26,4 +36,13 @@ const onLogin = () => ({
   type: "ON_LOGIN"
 });
 
-export { loadMovies, setMovies, loadGenres, setGenres, emitLogin, onLogin };
+export {
+  loadMovies,
+  setMovies,
+  loadGenres,
+  setGenres,
+  emitLogin,
+  onLogin,
+  getMovie,
+  setMovie
+};
