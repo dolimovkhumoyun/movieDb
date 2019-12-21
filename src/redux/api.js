@@ -18,7 +18,6 @@ const getMovie = async movie_id => {
 };
 
 const getGenres = async () => {
-  let api_url = url + "/genre/movie/list?api_key=" + key;
   const response = await axios.get(
     "https://api.themoviedb.org/3/genre/movie/list?api_key=" + key
   );

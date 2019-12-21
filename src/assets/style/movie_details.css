@@ -1,0 +1,10 @@
+.backdrop_wrapper {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #f5ebeb;
+  width: 100%;
+  height: 300;
+  display: block;
+  position: relative;
+}

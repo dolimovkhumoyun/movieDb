@@ -1,7 +1,6 @@
-import { all, fork, take, takeLatest } from "redux-saga/effects";
-import watchMovieLoad from "./moviesSaga";
-import watchGenresLoad from "./genresSaga";
-import { call, put, takeEvery } from "redux-saga/effects";
+import { all, takeLatest } from "redux-saga/effects";
+
+import { call, put } from "redux-saga/effects";
 import { setMovies, setMovie, setGenres } from "../actions";
 import { getMovies, getMovie, getGenres } from "../api";
 

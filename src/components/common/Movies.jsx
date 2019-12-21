@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import { Card, Col, Row, Rate, Pagination } from "antd";
-import StartRatings from "react-star-ratings";
 import _ from "lodash";
 // import { getMovies } from "../../redux/api";
 
@@ -16,13 +15,14 @@ class Movies extends Component {
       genre_ids.map(id => {
         const genre = _.find(this.props.genres, { id: id });
         genres.push(genre);
+        return true;
       });
       return genres[0].name;
     }
   }
 
   render() {
-    const { movies, genres, onClick } = this.props;
+    const { movies, onClick } = this.props;
     const results = movies.results !== undefined ? movies.results : [];
     return (
       <React.Fragment>
@@ -30,9 +30,10 @@ class Movies extends Component {
           {" "}
           <Row gutter={16} className="movie-row">
             {results.map(movie => (
-              <Col span={6}>
+              <Col span={6} key={movie.id}>
                 <Card
                   hoverable
+                  key={movie.id}
                   className="ml-auto card"
                   onClick={() => onClick(movie.id)}
                   cover={

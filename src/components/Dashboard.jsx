@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import SearchBar from "antd/lib/input/Search";
 import Movies from "./common/Movies";
 
-import _ from "lodash";
+// import _ from "lodash";
 
 import { connect } from "react-redux";
 import { loadMovies, loadGenres, getMovie } from "../redux/actions";
 
 import "antd/dist/antd.css";
 import "../assets/style/style.scss";
-import { Pagination, Col, Row, Spin } from "antd";
+import { Spin } from "antd";
 
 class Dashboard extends Component {
   state = {
@@ -22,10 +22,10 @@ class Dashboard extends Component {
   }
 
   onCardClick = movie_id => {
-    this.props.getMovie(movie_id);
+    this.props.history.push(`/movie/${movie_id}`);
   };
 
-  onChange = page => {
+  onChange = page => { 
     console.log(page);
     this.setState({ currentPage: page });
     this.props.loadMovies(page);
@@ -75,4 +75,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Dashboard);
+)(Dashboard); 
