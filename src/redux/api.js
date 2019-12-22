@@ -1,4 +1,5 @@
 import axios from "axios";
+import _ from "lodash";
 import { url } from "./consts";
 
 const key = "06aa50e38281dd9b38543df33f8bab2c";
@@ -24,4 +25,13 @@ const getGenres = async () => {
   return response.data;
 };
 
-export { getMovies, getGenres, getMovie };
+const getRelatedMovies = async movie_id => {
+  const response = await axios.get(
+    `https://api.themoviedb.org/3/movie/${movie_id}/recommendations?api_key=` +
+      key
+  );
+
+  return response.data;
+};
+
+export { getMovies, getGenres, getMovie, getRelatedMovies };

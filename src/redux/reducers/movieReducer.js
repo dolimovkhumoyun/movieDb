@@ -11,6 +11,13 @@ const movieReducer = (state = [], action) => {
       movie_details: action.payload
     };
   }
+
+  if (action.type === "SET_RELATED") {
+    return {
+      ...state,
+      related_movies: action.payload
+    };
+  }
   return state;
 };
 

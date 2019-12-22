@@ -36,6 +36,16 @@ const onLogin = () => ({
   type: "ON_LOGIN"
 });
 
+const getRelatedMovies = genres => ({
+  type: "GET_RELATED",
+  payload: genres
+});
+
+const setRelatedMovies = movies => ({
+  type: "SET_RELATED",
+  payload: movies
+});
+
 export {
   loadMovies,
   setMovies,
@@ -44,5 +54,7 @@ export {
   emitLogin,
   onLogin,
   getMovie,
-  setMovie
+  setMovie,
+  getRelatedMovies,
+  setRelatedMovies
 };

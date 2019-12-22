@@ -1,14 +1,15 @@
 import { all, takeLatest } from "redux-saga/effects";
 
 import { call, put } from "redux-saga/effects";
-import { setMovies, setMovie, setGenres } from "../actions";
-import { getMovies, getMovie, getGenres } from "../api";
+import { setMovies, setMovie, setGenres, setRelatedMovies } from "../actions";
+import { getMovies, getMovie, getGenres, getRelatedMovies } from "../api";
 
 function* rootSaga() {
   yield all([
     takeLatest("LOAD", handleMovieLoad),
     takeLatest("GET_MOVIE", fetchMovie),
-    takeLatest("LOAD_GENRES", handleGenresLoad)
+    takeLatest("LOAD_GENRES", handleGenresLoad),
+    takeLatest("GET_RELATED", handleRelatedLoad)
   ]);
 }
 
@@ -25,6 +26,11 @@ function* fetchMovie(action) {
 function* handleGenresLoad(payload) {
   const genres = yield call(getGenres, payload.value);
   yield put(setGenres(genres));
+}
+
+function* handleRelatedLoad(action) {
+  const movies = yield call(getRelatedMovies, action.payload);
+  yield put(setRelatedMovies(movies));
 }
 
 export default rootSaga;
