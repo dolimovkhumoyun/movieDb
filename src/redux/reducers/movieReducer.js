@@ -1,7 +1,8 @@
 const movieReducer = (state = [], action) => {
   if (action.type === "LOAD_SUCCESS") {
     return {
-      ...action.movies
+      ...state,
+      popular: action.movies
     };
   }
 
@@ -18,6 +19,14 @@ const movieReducer = (state = [], action) => {
       related_movies: action.payload
     };
   }
+
+  if (action.type === "SET_DISCOVERED") {
+    return {
+      ...state,
+      discovered: action.payload
+    };
+  }
+
   return state;
 };
 

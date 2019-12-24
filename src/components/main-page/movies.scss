@@ -1,0 +1,10 @@
+.movie-row {
+  margin-top: 0px;
+  width: 95%;
+  margin-left: 2.5%;
+
+  .slick-prev:before,
+  .slick-next:before {
+    color: black;
+  }
+}

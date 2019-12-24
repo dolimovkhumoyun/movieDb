@@ -34,4 +34,16 @@ const getRelatedMovies = async movie_id => {
   return response.data;
 };
 
-export { getMovies, getGenres, getMovie, getRelatedMovies };
+const getDiscoveredMovies = async () => {
+  let urls = `${url}/movie/top_rated/?api_key=${key}`;
+  const response = await axios.get(urls);
+  return response.data;
+};
+
+export {
+  getMovies,
+  getGenres,
+  getMovie,
+  getRelatedMovies,
+  getDiscoveredMovies
+};

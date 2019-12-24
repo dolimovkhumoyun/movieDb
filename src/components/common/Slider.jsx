@@ -9,13 +9,12 @@ import "slick-carousel/slick/slick-theme.css";
 const MovieSlider = ({ movies, onCardClick }) => {
   const settings = {
     dots: true,
-    speed: 800,
+    speed: 500,
     slidesToShow: 7,
     slidesToScroll: 2
   };
-  const { Meta } = Card;
-
-  if (movies !== undefined) {
+  // const { Meta } = Card;
+  if (movies.results !== undefined && movies !== undefined) {
     return (
       <Slider {...settings}>
         {movies.results.map(movie => (
@@ -24,7 +23,7 @@ const MovieSlider = ({ movies, onCardClick }) => {
               hoverable
               key={movie.id}
               className="ml-auto card"
-              onClick={() => onCardClick(movie.id)}
+              onDoubleClick={() => onCardClick(movie.id)}
               cover={
                 <img
                   alt="example"

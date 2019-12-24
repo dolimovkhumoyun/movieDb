@@ -46,6 +46,16 @@ const setRelatedMovies = movies => ({
   payload: movies
 });
 
+// GET DISCOVERED MOVIES
+const getDiscovered = () => ({
+  type: "GET_DISCOVERED"
+});
+
+const setDiscovered = movies => ({
+  type: "SET_DISCOVERED",
+  payload: movies
+});
+
 export {
   loadMovies,
   setMovies,
@@ -56,5 +66,7 @@ export {
   getMovie,
   setMovie,
   getRelatedMovies,
-  setRelatedMovies
+  setRelatedMovies,
+  getDiscovered,
+  setDiscovered
 };
