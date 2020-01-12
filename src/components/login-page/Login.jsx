@@ -1,0 +1,96 @@
+import React, { Component } from "react";
+import LoginForm from "./LoginForm";
+import RegisterForm from "./RegisterForm";
+
+import GoogleLogin from "react-google-login";
+import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
+
+import { Card, Row, Col, Tabs, Typography } from "antd";
+
+import "./index.scss";
+import google from "../../assets/img/google.svg";
+import facebook from "../../assets/img/facebook.svg";
+
+import { connect } from "react-redux";
+import { auth } from "../../redux/actions";
+
+class Login extends Component {
+  state = {};
+
+  onLogin = (e, formData) => {
+    e.preventDefault();
+    let profileData = formData.getFieldsValue();
+    profileData.option = "local-auth";
+    this.props.auth(profileData);
+  };
+
+  responseGoogle = response => {
+    let profileData = response.profileObj;
+    profileData.option = "google-auth";
+    this.props.auth(profileData);
+  };
+
+  responseFacebook = response => {
+    console.log("Repsone");
+    console.log(response);
+  };
+
+  render() {
+    const { TabPane } = Tabs;
+    const { Title } = Typography;
+
+    return (
+      <Row>
+        <Col span={8} offset={8} style={{ marginTop: 150 }}>
+          <Card>
+            <Col offset={5} span={13}>
+              <Tabs tabBarGutter={165}>
+                <TabPane tab={<span>Sign in</span>} key="1">
+                  <LoginForm onLogin={this.onLogin} />
+                  <Col offset={6}>
+                    <Title type="secondary" level={4}>
+                      Quick access with
+                    </Title>
+                  </Col>
+                  <br />
+                  <Row>
+                    <Col span={8} offset={4}>
+                      <GoogleLogin
+                        clientId="284653485315-5gi0g4ss8950l2o5u34kn75ikptmrvub.apps.googleusercontent.com"
+                        buttonText="Login"
+                        onSuccess={this.responseGoogle}
+                        onFailure={this.responseGoogle}
+                        cookiePolicy={"single_host_origin"}
+                        render={renderProps => (
+                          <img src={google} className="signin-buttons" onClick={renderProps.onClick} />
+                        )}
+                      />
+                    </Col>
+                    <Col span={8} offset={4}>
+                      <FacebookLogin
+                        appId="782292608859808"
+                        callback={this.responseFacebook}
+                        render={renderProps => (
+                          <img src={facebook} className="signin-buttons" onClick={renderProps.onClick} />
+                        )}
+                      />
+                    </Col>
+                  </Row>
+                </TabPane>
+                <TabPane tab={<span>Sign up</span>} key="2">
+                  <RegisterForm onLogin={this.onLogin} />
+                </TabPane>
+              </Tabs>
+            </Col>
+          </Card>
+        </Col>
+      </Row>
+    );
+  }
+}
+
+const mapDispatchToProps = dispatch => ({
+  auth: userData => dispatch(auth(userData))
+});
+
+export default connect(null, mapDispatchToProps)(Login);

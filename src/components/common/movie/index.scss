@@ -1,11 +1,6 @@
 .movie-card {
-  margin: 4% 0 0 5%;
-  &:hover {
-    box-shadow: 0 10px 20px 10px rgba(black, 0.2);
-  }
-  a:hover {
-    text-decoration: none;
-  }
+  margin: 2% 0 0 1%;
+
   .ant-card-meta-title:hover {
     color: blueviolet;
   }
@@ -29,7 +24,7 @@
 }
 
 .related-movies {
-  margin-top: 0px;
+  margin-top: 10px;
   width: 95%;
   margin-left: 2.5%;
   #poster {

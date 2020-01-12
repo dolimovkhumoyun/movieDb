@@ -56,6 +56,17 @@ const setDiscovered = movies => ({
   payload: movies
 });
 
+export const auth = (userData, option) => ({
+  type: "AUTH",
+  payload: userData,
+  option: option
+});
+
+export const setUser = userData => ({
+  type: "SET_USER",
+  payload: userData
+});
+
 export {
   loadMovies,
   setMovies,

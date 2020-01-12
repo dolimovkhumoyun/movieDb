@@ -9,9 +9,9 @@ import "slick-carousel/slick/slick-theme.css";
 const MovieSlider = ({ movies, onCardClick }) => {
   const settings = {
     dots: true,
-    speed: 500,
+    speed: 400,
     slidesToShow: 7,
-    slidesToScroll: 2
+    slidesToScroll: 4
   };
   // const { Meta } = Card;
   if (movies.results !== undefined && movies !== undefined) {

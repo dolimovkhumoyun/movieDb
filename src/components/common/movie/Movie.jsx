@@ -40,12 +40,14 @@ class Movie extends Component {
         <React.Fragment>
           <div>
             <Row>
-              <Col md={5}>
-                <CardWrapper
-                  movie_details={movie_details}
-                  backdropImgUrl={backdropImgUrl}
-                />
-              </Col>
+              <div className="movie-card">
+                <Col md={5}>
+                  <CardWrapper
+                    movie_details={movie_details}
+                    backdropImgUrl={backdropImgUrl}
+                  />
+                </Col>
+              </div>
               <Col md={16}>
                 <div className="movie-info">
                   <Title level={2} id="title">

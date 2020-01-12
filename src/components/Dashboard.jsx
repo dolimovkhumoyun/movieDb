@@ -14,7 +14,7 @@ import {
 
 import "antd/dist/antd.css";
 import "../assets/style/style.scss";
-import { Row, Col } from "antd";
+import { Row, Col, Button } from "antd";
 
 class Dashboard extends Component {
   state = {
@@ -37,6 +37,10 @@ class Dashboard extends Component {
     this.props.loadMovies(page);
   };
 
+  onLoginClick = e => {
+    this.props.history.push("/login");
+  };
+
   render() {
     const { movies, genre } = this.props;
     const loaderVisibility = movies.popular !== undefined ? false : true;
@@ -47,6 +51,11 @@ class Dashboard extends Component {
           <Row style={{ marginTop: 40 }}>
             <Col span={6} offset={8}>
               <SearchBar />
+            </Col>
+            <Col span={2} offset={8}>
+              <Button icon="login" onClick={this.onLoginClick}>
+                Login
+              </Button>
             </Col>
           </Row>
           <Movies
