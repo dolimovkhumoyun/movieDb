@@ -41,7 +41,7 @@ function* handleDiscovered(action) {
 }
 
 function* handleAuth(action) {
-  const userData = yield call(auth, action.payload);
+  const userData = yield call(auth, action);
   yield put(setUser(userData));
 }
 

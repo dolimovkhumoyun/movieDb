@@ -20,14 +20,12 @@ class Login extends Component {
   onLogin = (e, formData) => {
     e.preventDefault();
     let profileData = formData.getFieldsValue();
-    profileData.option = "local-auth";
-    this.props.auth(profileData);
+    this.props.auth(profileData, "local-auth");
   };
 
   responseGoogle = response => {
     let profileData = response.profileObj;
-    profileData.option = "google-auth";
-    this.props.auth(profileData);
+    this.props.auth(profileData, "google-auth");
   };
 
   responseFacebook = response => {
@@ -90,7 +88,7 @@ class Login extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  auth: userData => dispatch(auth(userData))
+  auth: (userData, option) => dispatch(auth(userData, option))
 });
 
 export default connect(null, mapDispatchToProps)(Login);

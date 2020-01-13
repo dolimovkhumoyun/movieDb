@@ -35,9 +35,8 @@ const getDiscoveredMovies = async () => {
 };
 
 const auth = async userData => {
-  let api_url = userData.option === "google-auth" ? "http://localhost:8080/google" : "http://localhost:8080/users";
-  const response = await axios.post(api_url, userData);
-  console.log(response);
+  let api_url = userData.option === "local-auth" ? "http://localhost:8080/users/" : "http://localhost:8080/users/google";
+  const response = await axios.post(api_url, userData.payload);
   return response.data;
 };
 
