@@ -5,16 +5,13 @@ import Movies from "./main-page/Movies.jsx";
 // import _ from "lodash";
 
 import { connect } from "react-redux";
-import {
-  loadMovies,
-  loadGenres,
-  getMovie,
-  getDiscovered
-} from "../redux/actions";
+import { loadMovies, loadGenres, getMovie, getDiscovered } from "../redux/actions";
+import jwt from "jsonwebtoken";
 
 import "antd/dist/antd.css";
 import "../assets/style/style.scss";
 import { Row, Col, Button } from "antd";
+import ProfileDropdown from "./common/ProfileDropwond.jsx";
 
 class Dashboard extends Component {
   state = {
@@ -42,8 +39,20 @@ class Dashboard extends Component {
   };
 
   render() {
-    const { movies, genre } = this.props;
+    const { movies, genre, user } = this.props;
     const loaderVisibility = movies.popular !== undefined ? false : true;
+    const usrDetails = jwt.decode(localStorage.getItem("token"));
+    const profileDropdown = usrDetails.data ? (
+      <Col span={2} offset={6}>
+        <ProfileDropdown profile={usrDetails.data} />
+      </Col>
+    ) : (
+      <Col span={2} offset={8}>
+        <Button icon="login" onClick={this.onLoginClick}>
+          Login
+        </Button>
+      </Col>
+    );
 
     return (
       <React.Fragment>
@@ -52,11 +61,8 @@ class Dashboard extends Component {
             <Col span={6} offset={8}>
               <SearchBar />
             </Col>
-            <Col span={2} offset={8}>
-              <Button icon="login" onClick={this.onLoginClick}>
-                Login
-              </Button>
-            </Col>
+
+            {profileDropdown}
           </Row>
           <Movies
             movies={movies}
@@ -71,9 +77,10 @@ class Dashboard extends Component {
   }
 }
 
-const mapStateToProps = ({ movies, genre }) => ({
+const mapStateToProps = ({ movies, genre, user }) => ({
   movies,
-  genre
+  genre,
+  user
 });
 
 const mapDispatchToProps = dispatch => ({

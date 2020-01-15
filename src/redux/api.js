@@ -34,10 +34,9 @@ const getDiscoveredMovies = async () => {
   return response.data;
 };
 
-const auth = async userData => {
-  let api_url = userData.option === "local-auth" ? "http://localhost:8080/users/" : "http://localhost:8080/users/google";
-  const response = await axios.post(api_url, userData.payload);
-  return response.data;
-};
+// const auth = async userData => {
+//   let api_url = userData.option === "local-auth" ? "http://localhost:8080/users/" : "http://localhost:8080/users/google";
+//   return response.data;
+// };
 
-export { getMovies, getGenres, getMovie, getRelatedMovies, getDiscoveredMovies, auth };
+export { getMovies, getGenres, getMovie, getRelatedMovies, getDiscoveredMovies };

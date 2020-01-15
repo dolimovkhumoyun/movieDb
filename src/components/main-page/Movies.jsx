@@ -25,7 +25,6 @@ class Movies extends Component {
     const popular = movies.popular !== undefined ? movies.popular : [];
 
     const discovered = movies.discovered !== undefined ? movies.discovered : [];
-    console.log(discovered);
     return (
       <React.Fragment>
         <div className="movie-row">

@@ -12,20 +12,33 @@ import google from "../../assets/img/google.svg";
 import facebook from "../../assets/img/facebook.svg";
 
 import { connect } from "react-redux";
-import { auth } from "../../redux/actions";
+import axios from "axios";
+import { setUser } from "../../redux/actions";
 
 class Login extends Component {
   state = {};
 
-  onLogin = (e, formData) => {
+  onLogin = async (e, formData) => {
     e.preventDefault();
     let profileData = formData.getFieldsValue();
-    this.props.auth(profileData, "local-auth");
+    const response = await axios.post("http://localhost:8080/users/", profileData);
+    this.handleUserResponse(response);
   };
 
-  responseGoogle = response => {
-    let profileData = response.profileObj;
-    this.props.auth(profileData, "google-auth");
+  responseGoogle = async g_response => {
+    let profileData = g_response.profileObj;
+    const response = await axios.post("http://localhost:8080/users/google", profileData);
+    this.handleUserResponse(response);
+  };
+
+  handleUserResponse = ({ status, data }) => {
+    if (status === 200) {
+      localStorage.setItem("token", data.token);
+      this.props.setUser(data.user);
+      this.props.history.push("/");
+    } else {
+      console.log(data);
+    }
   };
 
   responseFacebook = response => {
@@ -88,7 +101,7 @@ class Login extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  auth: (userData, option) => dispatch(auth(userData, option))
+  setUser: userData => dispatch(setUser(userData))
 });
 
 export default connect(null, mapDispatchToProps)(Login);
