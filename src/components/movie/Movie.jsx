@@ -3,12 +3,12 @@ import React, { Component } from "react";
 import { Spin, Card, Row, Col, Typography, Icon, Button } from "antd";
 
 import { connect } from "react-redux";
-import { getMovie, loadGenres, getRelatedMovies } from "../../../redux/actions";
+import { getMovie, loadGenres, getRelatedMovies } from "../../redux/actions";
 
 import "./index.scss";
-import MovieSlider from "../Slider";
-import DescriptionTable from "../DescriptionTable";
-import CardWrapper from "../CardWrapper";
+import MovieSlider from "../common/Slider";
+import DescriptionTable from "../common/DescriptionTable";
+import CardWrapper from "../common/CardWrapper";
 
 class Movie extends Component {
   state = {};
@@ -42,10 +42,7 @@ class Movie extends Component {
             <Row>
               <div className="movie-card">
                 <Col md={5}>
-                  <CardWrapper
-                    movie_details={movie_details}
-                    backdropImgUrl={backdropImgUrl}
-                  />
+                  <CardWrapper movie_details={movie_details} backdropImgUrl={backdropImgUrl} />
                 </Col>
               </div>
               <Col md={16}>
@@ -63,10 +60,7 @@ class Movie extends Component {
             </Row>
             <div className="related-movies">
               <Row>
-                <MovieSlider
-                  movies={related_movies || []}
-                  onCardClick={this.onCardClick}
-                />
+                <MovieSlider movies={related_movies || []} onCardClick={this.onCardClick} />
               </Row>
             </div>
           </div>
