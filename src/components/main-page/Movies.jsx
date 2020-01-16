@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 
-import { Row, Typography } from "antd";
+import { Row, Typography, Pagination, Col } from "antd";
 import _ from "lodash";
 
 import MovieSlider from "../common/Slider";
 import "../main-page/movies.scss";
+import MoviesContainer from "../common/MoviesContainer";
 
 class Movies extends Component {
   renderGenreName(genre_ids) {
@@ -23,8 +24,8 @@ class Movies extends Component {
     const { Title } = Typography;
     const { movies, onClick } = this.props;
     const popular = movies.popular !== undefined ? movies.popular : [];
-
     const discovered = movies.discovered !== undefined ? movies.discovered : [];
+
     return (
       <React.Fragment>
         <div className="movie-row">
@@ -33,6 +34,7 @@ class Movies extends Component {
               Popular Movies:{" "}
             </Title>
             <MovieSlider movies={popular || []} onCardClick={onClick} />
+            <Pagination defaultCurrent={6} total={500} className="pagination" />
           </Row>
         </div>
         <div className="movie-row" style={{ marginTop: 40 }}>
@@ -41,6 +43,7 @@ class Movies extends Component {
               Discovering Movies:{" "}
             </Title>
             <MovieSlider movies={discovered || []} onCardClick={onClick} />
+            <Pagination defaultCurrent={6} total={500} className="pagination" />
           </Row>
         </div>
       </React.Fragment>
