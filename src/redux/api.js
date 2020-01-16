@@ -23,7 +23,9 @@ const getGenres = async () => {
 };
 
 const getRelatedMovies = async movie_id => {
-  const response = await axios.get(`https://api.themoviedb.org/3/movie/${movie_id}/recommendations?api_key=` + key);
+  const response = await axios.get(
+    `https://api.themoviedb.org/3/movie/${movie_id}/recommendations?api_key=` + key
+  );
 
   return response.data;
 };

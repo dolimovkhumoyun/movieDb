@@ -22,7 +22,7 @@ class Movies extends Component {
 
   render() {
     const { Title } = Typography;
-    const { movies, onClick } = this.props;
+    const { movies, onClick, onPageClick, currentPage } = this.props;
     const popular = movies.popular !== undefined ? movies.popular : [];
     const discovered = movies.discovered !== undefined ? movies.discovered : [];
 
@@ -34,7 +34,12 @@ class Movies extends Component {
               Popular Movies:{" "}
             </Title>
             <MovieSlider movies={popular || []} onCardClick={onClick} />
-            <Pagination defaultCurrent={6} total={500} className="pagination" />
+            <Pagination
+              defaultCurrent={currentPage}
+              total={(popular.total_results / 20) | 500}
+              className="pagination"
+              onChange={onPageClick}
+            />
           </Row>
         </div>
         <div className="movie-row" style={{ marginTop: 40 }}>
@@ -43,7 +48,7 @@ class Movies extends Component {
               Discovering Movies:{" "}
             </Title>
             <MovieSlider movies={discovered || []} onCardClick={onClick} />
-            <Pagination defaultCurrent={6} total={500} className="pagination" />
+            <Pagination defaultCurrent={0} total={500} className="pagination" />
           </Row>
         </div>
       </React.Fragment>
