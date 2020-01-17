@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Spin, Card, Rate, Col } from "antd";
+import Skeleton from "react-loading-skeleton";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -14,6 +15,7 @@ const MovieSlider = ({ movies, onCardClick }) => {
     slidesToShow: 7,
     slidesToScroll: 4
   };
+
   if (movies.results !== undefined && movies !== undefined) {
     return (
       <Slider {...settings}>

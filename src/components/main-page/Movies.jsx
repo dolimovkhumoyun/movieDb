@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Row, Typography, Pagination, Col } from "antd";
+import { Row, Typography, Pagination } from "antd";
 import _ from "lodash";
 
 import MovieSlider from "../common/Slider";
@@ -22,7 +22,7 @@ class Movies extends Component {
 
   render() {
     const { Title } = Typography;
-    const { movies, onClick, onPageClick, currentPage } = this.props;
+    const { movies, onClick, onPageClick, currentPage, disCurrentPage } = this.props;
     const popular = movies.popular !== undefined ? movies.popular : [];
     const discovered = movies.discovered !== undefined ? movies.discovered : [];
 
@@ -38,7 +38,7 @@ class Movies extends Component {
               defaultCurrent={currentPage}
               total={(popular.total_results / 20) | 500}
               className="pagination"
-              onChange={onPageClick}
+              onChange={e => onPageClick(e, "popular")}
             />
           </Row>
         </div>
@@ -48,7 +48,12 @@ class Movies extends Component {
               Discovering Movies:{" "}
             </Title>
             <MovieSlider movies={discovered || []} onCardClick={onClick} />
-            <Pagination defaultCurrent={0} total={500} className="pagination" />
+            <Pagination
+              defaultCurrent={disCurrentPage}
+              total={(discovered.total_results / 20) | 500}
+              className="pagination"
+              onChange={e => onPageClick(e, "discovered")}
+            />
           </Row>
         </div>
       </React.Fragment>

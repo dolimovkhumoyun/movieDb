@@ -1,8 +1,15 @@
 const movieReducer = (state = [], action) => {
+  if (action.type === "LOAD") {
+    return {
+      ...state,
+      popular: { results: [], isLoading: true }
+    };
+  }
+
   if (action.type === "LOAD_SUCCESS") {
     return {
       ...state,
-      popular: action.movies
+      popular: { ...action.movies, isLoading: false }
     };
   }
 
@@ -20,10 +27,17 @@ const movieReducer = (state = [], action) => {
     };
   }
 
+  if (action.type === "GET_DISCOVERED") {
+    return {
+      ...state,
+      discovered: { results: [], isLoading: true }
+    };
+  }
+
   if (action.type === "SET_DISCOVERED") {
     return {
       ...state,
-      discovered: action.payload
+      discovered: { ...action.payload, isLoading: false }
     };
   }
 

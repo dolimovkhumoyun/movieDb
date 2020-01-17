@@ -47,8 +47,9 @@ const setRelatedMovies = movies => ({
 });
 
 // GET DISCOVERED MOVIES
-const getDiscovered = () => ({
-  type: "GET_DISCOVERED"
+const getDiscovered = page => ({
+  type: "GET_DISCOVERED",
+  payload: page
 });
 
 const setDiscovered = movies => ({

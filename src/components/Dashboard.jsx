@@ -15,7 +15,8 @@ import ProfileDropdown from "./common/ProfileDropwond.jsx";
 
 class Dashboard extends Component {
   state = {
-    currentPage: 1
+    currentPage: 1,
+    dis_current_page: 1
   };
 
   componentDidMount() {
@@ -28,10 +29,15 @@ class Dashboard extends Component {
     this.props.history.push(`/movie/${movie_id}`);
   };
 
-  onChange = page => {
-    console.log(page);
-    this.setState({ currentPage: page });
-    this.props.loadMovies(page);
+  onChange = (page, type) => {
+    console.log(page, type);
+    if (type === "popular") {
+      this.setState({ currentPage: page });
+      this.props.loadMovies(page);
+    } else if (type === "discovered") {
+      this.setState({ dis_current_page: page });
+      this.props.getDiscovered(page);
+    }
   };
 
   onLoginClick = e => {
@@ -70,6 +76,7 @@ class Dashboard extends Component {
             onClick={this.onCardClick}
             onPageClick={this.onChange}
             currentPage={this.state.currentPage}
+            disCurrentPage={this.state.dis_current_page}
           />
         </div>
       </React.Fragment>
@@ -87,7 +94,7 @@ const mapDispatchToProps = dispatch => ({
   loadMovies: page => dispatch(loadMovies(page)),
   loadGenres: () => dispatch(loadGenres()),
   getMovie: movie_id => dispatch(getMovie(movie_id)),
-  getDiscovered: () => dispatch(getDiscovered())
+  getDiscovered: page => dispatch(getDiscovered(page))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
