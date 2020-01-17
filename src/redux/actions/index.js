@@ -62,6 +62,16 @@ export const setUser = userData => ({
   payload: userData
 });
 
+export const getSearch = searchQuery => ({
+  type: "GET_SEARCH",
+  payload: searchQuery
+});
+
+export const setSearch = movies => ({
+  type: "SET_SEARCH",
+  payload: movies
+});
+
 export {
   loadMovies,
   setMovies,

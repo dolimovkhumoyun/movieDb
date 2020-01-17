@@ -1,19 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 
 import { Input } from "antd";
 
-class SearchBar extends Component {
-  render() {
-    const { Search } = Input;
+const SearchBar = ({ onSearch }) => {
+  const { Search } = Input;
 
-    return (
-      <Search
-        placeholder="input search text"
-        onSearch={value => console.log(value)}
-        allowClear
-      />
-    );
-  }
-}
+  return <Search placeholder="input search text" onSearch={onSearch} allowClear />;
+};
 
 export default SearchBar;

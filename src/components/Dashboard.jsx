@@ -1,11 +1,9 @@
 import React, { Component } from "react";
-import SearchBar from "antd/lib/input/Search";
+import SearchBar from "./common/SearchBar";
 import Movies from "./main-page/Movies.jsx";
 
-// import _ from "lodash";
-
 import { connect } from "react-redux";
-import { loadMovies, loadGenres, getMovie, getDiscovered } from "../redux/actions";
+import { loadMovies, loadGenres, getMovie, getDiscovered, getSearch } from "../redux/actions";
 import jwt from "jsonwebtoken";
 
 import "antd/dist/antd.css";
@@ -44,6 +42,11 @@ class Dashboard extends Component {
     this.props.history.push("/login");
   };
 
+  onSearch = value => {
+    // console.log(value);
+    this.props.getSearch(value);
+  };
+
   render() {
     const { movies, genre, user } = this.props;
     const loaderVisibility = movies.popular !== undefined ? false : true;
@@ -65,7 +68,7 @@ class Dashboard extends Component {
         <div className="">
           <Row style={{ marginTop: 40 }}>
             <Col span={6} offset={8}>
-              <SearchBar />
+              <SearchBar onSearch={this.onSearch} />
             </Col>
 
             {profileDropdown}
@@ -94,7 +97,8 @@ const mapDispatchToProps = dispatch => ({
   loadMovies: page => dispatch(loadMovies(page)),
   loadGenres: () => dispatch(loadGenres()),
   getMovie: movie_id => dispatch(getMovie(movie_id)),
-  getDiscovered: page => dispatch(getDiscovered(page))
+  getDiscovered: page => dispatch(getDiscovered(page)),
+  getSearch: searchQuery => dispatch(getSearch(searchQuery))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

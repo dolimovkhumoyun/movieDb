@@ -36,9 +36,10 @@ const getDiscoveredMovies = async page => {
   return response.data;
 };
 
-// const auth = async userData => {
-//   let api_url = userData.option === "local-auth" ? "http://localhost:8080/users/" : "http://localhost:8080/users/google";
-//   return response.data;
-// };
+const getSearchMovies = async searchQuery => {
+  let urls = `${url}/search/movie/?api_key=${key}&query=${searchQuery}`;
+  const response = await axios.get(urls);
+  return response.data;
+};
 
-export { getMovies, getGenres, getMovie, getRelatedMovies, getDiscoveredMovies };
+export { getMovies, getGenres, getMovie, getRelatedMovies, getDiscoveredMovies, getSearchMovies };

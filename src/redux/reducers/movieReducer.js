@@ -41,6 +41,13 @@ const movieReducer = (state = [], action) => {
     };
   }
 
+  if (action.type === "SET_SEARCH") {
+    return {
+      ...state,
+      search: action.payload
+    };
+  }
+
   return state;
 };
 
