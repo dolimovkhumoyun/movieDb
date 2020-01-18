@@ -3,13 +3,13 @@ import SearchBar from "./common/SearchBar";
 import Movies from "./main-page/Movies.jsx";
 
 import { connect } from "react-redux";
-import { loadMovies, loadGenres, getMovie, getDiscovered, getSearch } from "../redux/actions";
+import { loadMovies, loadGenres, getMovie, getDiscovered } from "../redux/actions";
 import jwt from "jsonwebtoken";
 
 import "antd/dist/antd.css";
 import "../assets/style/style.scss";
 import { Row, Col, Button } from "antd";
-import ProfileDropdown from "./common/ProfileDropwond.jsx";
+import ProfileDropdown from "./common/ProfileDropDown.jsx";
 
 class Dashboard extends Component {
   state = {
@@ -43,13 +43,11 @@ class Dashboard extends Component {
   };
 
   onSearch = value => {
-    // console.log(value);
-    this.props.getSearch(value);
+    this.props.history.push(`/search/movie/${value}`);
   };
 
   render() {
-    const { movies, genre, user } = this.props;
-    const loaderVisibility = movies.popular !== undefined ? false : true;
+    const { movies, genre } = this.props;
     const usrDetails = jwt.decode(localStorage.getItem("token"));
     const profileDropdown = usrDetails.data ? (
       <Col span={2} offset={6}>
@@ -97,8 +95,7 @@ const mapDispatchToProps = dispatch => ({
   loadMovies: page => dispatch(loadMovies(page)),
   loadGenres: () => dispatch(loadGenres()),
   getMovie: movie_id => dispatch(getMovie(movie_id)),
-  getDiscovered: page => dispatch(getDiscovered(page)),
-  getSearch: searchQuery => dispatch(getSearch(searchQuery))
+  getDiscovered: page => dispatch(getDiscovered(page))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

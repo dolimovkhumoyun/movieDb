@@ -1,15 +1,7 @@
 import { all, takeLatest } from "redux-saga/effects";
 
 import { call, put } from "redux-saga/effects";
-import {
-  setMovies,
-  setMovie,
-  setGenres,
-  setRelatedMovies,
-  setDiscovered,
-  setUser,
-  setSearch
-} from "../actions";
+import { setMovies, setMovie, setGenres, setRelatedMovies, setDiscovered, setSearch } from "../actions";
 import {
   getMovies,
   getMovie,

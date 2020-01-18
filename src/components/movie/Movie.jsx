@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Spin, Card, Row, Col, Typography, Icon, Button } from "antd";
+import { Spin, Row, Col, Typography, Icon, Button } from "antd";
 
 import { connect } from "react-redux";
 import { getMovie, loadGenres, getRelatedMovies } from "../../redux/actions";
@@ -29,7 +29,6 @@ class Movie extends Component {
   };
 
   render() {
-    const { Meta } = Card;
     const { Title } = Typography;
 
     const { movie_details, related_movies } = this.props.movies;

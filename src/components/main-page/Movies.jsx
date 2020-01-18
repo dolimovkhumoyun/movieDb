@@ -5,7 +5,6 @@ import _ from "lodash";
 
 import MovieSlider from "../common/Slider";
 import "../main-page/movies.scss";
-import MoviesContainer from "../common/MoviesContainer";
 
 class Movies extends Component {
   renderGenreName(genre_ids) {

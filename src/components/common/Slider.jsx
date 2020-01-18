@@ -1,7 +1,6 @@
 import React from "react";
 
 import { Spin, Card, Rate, Col } from "antd";
-import Skeleton from "react-loading-skeleton";
 
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";

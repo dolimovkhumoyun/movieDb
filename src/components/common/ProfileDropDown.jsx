@@ -8,7 +8,6 @@ const ProfileDropdown = ({ profile }) => {
       <Menu.Item>Logout</Menu.Item>
     </Menu>
   );
-  const img = "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png";
   return (
     <Dropdown overlay={menu}>
       <div>

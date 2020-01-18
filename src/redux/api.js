@@ -1,5 +1,4 @@
 import axios from "axios";
-import _ from "lodash";
 import { url } from "./consts";
 
 const key = "06aa50e38281dd9b38543df33f8bab2c";

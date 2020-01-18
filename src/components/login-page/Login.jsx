@@ -73,7 +73,12 @@ class Login extends Component {
                         onFailure={this.responseGoogle}
                         cookiePolicy={"single_host_origin"}
                         render={renderProps => (
-                          <img src={google} className="signin-buttons" onClick={renderProps.onClick} />
+                          <img
+                            src={google}
+                            className="signin-buttons"
+                            onClick={renderProps.onClick}
+                            alt="google logo"
+                          />
                         )}
                       />
                     </Col>
@@ -82,7 +87,12 @@ class Login extends Component {
                         appId="782292608859808"
                         callback={this.responseFacebook}
                         render={renderProps => (
-                          <img src={facebook} className="signin-buttons" onClick={renderProps.onClick} />
+                          <img
+                            src={facebook}
+                            className="signin-buttons"
+                            onClick={renderProps.onClick}
+                            alt="facebook logo"
+                          />
                         )}
                       />
                     </Col>
