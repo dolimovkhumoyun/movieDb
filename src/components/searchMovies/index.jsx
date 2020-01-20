@@ -5,9 +5,13 @@ import { connect } from "react-redux";
 import { getSearch } from "../../redux/actions";
 
 const SearchMovie = props => {
+  const { getSearch } = props;
+
   useEffect(() => {
-    const searchQuery = props.match.params.searchQuery;
-    props.getSearch(searchQuery);
+    console.log("Hello");
+    const { searchQuery } = props.match.params;
+    getSearch(searchQuery);
+    //eslint-disable-next-line
   }, []);
 
   const onCardClick = movie_id => {
