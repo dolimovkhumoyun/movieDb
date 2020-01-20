@@ -4,7 +4,7 @@ import { Row, Typography, Pagination } from "antd";
 import _ from "lodash";
 
 import MovieSlider from "../common/Slider";
-import "../main-page/movies.scss";
+import "../searchMovies/index.scss";
 
 class Movies extends Component {
   renderGenreName(genre_ids) {

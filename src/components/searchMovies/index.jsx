@@ -18,7 +18,11 @@ const SearchMovie = props => {
     props.history.push(`/movie/${movie_id}`);
   };
 
-  return <MoviesContainer movies={props.movies.search} onCardClick={onCardClick} />;
+  return (
+    <div className="movie-row">
+      <MoviesContainer movies={props.movies.search} onCardClick={onCardClick} />
+    </div>
+  );
 };
 
 const mapStateToProps = ({ movies }) => ({ movies });
