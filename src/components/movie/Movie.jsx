@@ -10,6 +10,9 @@ import MovieSlider from "../common/Slider";
 import DescriptionTable from "../common/DescriptionTable";
 import CardWrapper from "../common/CardWrapper";
 
+import jwt from "jsonwebtoken";
+import axios from "axios";
+
 class Movie extends Component {
   state = {};
 
@@ -28,6 +31,20 @@ class Movie extends Component {
     this.props.history.push("/");
   };
 
+  onAddClick = async movie => {
+    const user_details = jwt.decode(localStorage.getItem("token"));
+    const movie_details = {
+      user_id: user_details.data.id,
+      movie_id: movie.id,
+      movie_title: movie.original_title,
+      vote_average: movie.vote_average,
+      poster_path: movie.poster_path,
+      token: localStorage.getItem("token")
+    };
+    const response = await axios.post("http://localhost:8080/fav", movie_details);
+    console.log(response);
+  };
+
   render() {
     const { Title } = Typography;
 
@@ -41,7 +58,11 @@ class Movie extends Component {
             <Row>
               <div className="movie-card">
                 <Col md={5}>
-                  <CardWrapper movie_details={movie_details} backdropImgUrl={backdropImgUrl} />
+                  <CardWrapper
+                    movie_details={movie_details}
+                    backdropImgUrl={backdropImgUrl}
+                    onAddClick={() => this.onAddClick(movie_details)}
+                  />
                 </Col>
               </div>
               <Col md={16}>
