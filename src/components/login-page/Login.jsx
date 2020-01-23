@@ -10,13 +10,13 @@ const Login = props => {
   const onLogin = async (e, formData) => {
     e.preventDefault();
     let profileData = formData.getFieldsValue();
-    const response = await axios.post("http://localhost:8080/users/", profileData);
+    const response = await axios.post("https://dolimovs.studio:8080/users/", profileData);
     handleUserResponse(response);
   };
 
   const responseGoogle = async g_response => {
     let profileData = g_response.profileObj;
-    const response = await axios.post("http://localhost:8080/users/google", profileData);
+    const response = await axios.post("https://dolimovs.studio:8080/users/google", profileData);
     handleUserResponse(response);
   };
 

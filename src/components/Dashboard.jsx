@@ -20,7 +20,7 @@ const Dashboard = props => {
 
   useEffect(() => {
     props.loadMovies(1);
-    props.getDiscovered();
+    props.getDiscovered(1);
     props.loadGenres();
     // eslint-disable-next-line
   }, []);

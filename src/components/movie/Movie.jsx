@@ -41,7 +41,7 @@ class Movie extends Component {
       poster_path: movie.poster_path,
       token: localStorage.getItem("token")
     };
-    const response = await axios.post("http://localhost:8080/fav", movie_details);
+    const response = await axios.post("https://dolimovs.studio:8080/fav", movie_details);
     console.log(response);
   };
 

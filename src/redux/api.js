@@ -30,6 +30,7 @@ const getRelatedMovies = async movie_id => {
 };
 
 const getDiscoveredMovies = async page => {
+  console.log(page);
   let urls = `${url}/movie/top_rated/?api_key=${key}&page=${page}`;
   const response = await axios.get(urls);
   return response.data;

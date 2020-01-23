@@ -2,6 +2,8 @@
   "name": "moviedb",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
+  "start_url": ".",
   "dependencies": {
     "@bit/dolimovkhumoyun.form_test.form": "0.0.3",
     "antd": "^3.26.7",
