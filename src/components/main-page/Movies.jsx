@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 
-import { Row, Typography, Pagination } from "antd";
+import { Typography, Pagination, Col } from "antd";
 import _ from "lodash";
 
-import MovieSlider from "../common/Slider";
-import "../searchMovies/index.scss";
+import MoviesContainer from "./MoviesContainer";
+import "./movies.scss";
+import Skeleton from "./Skeleton";
 
 class Movies extends Component {
   renderGenreName(genre_ids) {
@@ -21,40 +22,35 @@ class Movies extends Component {
 
   render() {
     const { Title } = Typography;
-    const { movies, onClick, onPageClick, currentPage, disCurrentPage } = this.props;
+    const { movies, onClick, genres, onPageClick, currentPage } = this.props;
     const popular = movies.popular !== undefined ? movies.popular : [];
-    const discovered = movies.discovered !== undefined ? movies.discovered : [];
-
     return (
       <React.Fragment>
         <div className="movie-row">
-          <Row>
-            <Title type="secondary" level={2}>
-              Popular Movies:{" "}
-            </Title>
-            <MovieSlider movies={popular || []} onCardClick={onClick} />
-            <Pagination
-              defaultCurrent={currentPage}
-              total={(popular.total_results / 20) | 500}
-              className="pagination"
-              onChange={e => onPageClick(e, "popular")}
+          <Title type="secondary" level={2}>
+            Popular Movies:{" "}
+          </Title>
+          {popular.isLoading === undefined || popular.isLoading ? (
+            <Skeleton />
+          ) : (
+            <MoviesContainer
+              movies={popular || []}
+              onCardClick={onClick}
+              genres={genres}
+              onPageClick={onPageClick}
+              currentPage={currentPage}
             />
-          </Row>
+          )}
         </div>
-        <div className="movie-row" style={{ marginTop: 40 }}>
-          <Row>
-            <Title type="secondary" level={2}>
-              Discovering Movies:{" "}
-            </Title>
-            <MovieSlider movies={discovered || []} onCardClick={onClick} />
-            <Pagination
-              defaultCurrent={disCurrentPage}
-              total={(discovered.total_results / 20) | 500}
-              className="pagination"
-              onChange={e => onPageClick(e, "discovered")}
-            />
-          </Row>
-        </div>
+        <Col xs={24} lg={{ span: 12, offset: 9 }} xl={{ span: 12, offset: 9 }} xxl={{ span: 12, offset: 9 }}>
+          <Pagination
+            total={popular.total_results}
+            currentPage={currentPage}
+            onChange={onPageClick}
+            pageSize={20}
+            style={{ marginTop: 10, padding: 10 }}
+          />
+        </Col>
       </React.Fragment>
     );
   }

@@ -25,14 +25,9 @@ const Dashboard = props => {
     // eslint-disable-next-line
   }, []);
 
-  const onChange = (page, type) => {
-    if (type === "popular") {
-      setCurPage(page);
-      props.loadMovies(page);
-    } else if (type === "discovered") {
-      setDisCurPage(page);
-      props.getDiscovered(page);
-    }
+  const onChange = page => {
+    setCurPage(page);
+    props.loadMovies(page);
   };
 
   const onLoginClick = e => {
@@ -75,7 +70,6 @@ const Dashboard = props => {
           onClick={onCardClick}
           onPageClick={onChange}
           currentPage={cur_page}
-          disCurrentPage={dis_current_page}
         />
       </div>
     </React.Fragment>

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import MoviesContainer from "../common/MoviesContainer";
+import MoviesContainer from "../main-page/MoviesContainer";
 
 import { connect } from "react-redux";
 import { getSearch } from "../../redux/actions";
