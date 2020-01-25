@@ -12,6 +12,7 @@ import CardWrapper from "../common/CardWrapper";
 
 import jwt from "jsonwebtoken";
 import axios from "axios";
+import CustomCard from "./CustomCard";
 
 class Movie extends Component {
   state = {};
@@ -49,7 +50,7 @@ class Movie extends Component {
     const { Title } = Typography;
 
     const { movie_details, related_movies } = this.props.movies;
-
+    console.log(movie_details);
     if (movie_details !== undefined) {
       const backdropImgUrl = movie_details.poster_path;
       return (
@@ -58,8 +59,8 @@ class Movie extends Component {
             <Row>
               <div className="movie-card">
                 <Col md={5}>
-                  <CardWrapper
-                    movie_details={movie_details}
+                  <CustomCard
+                    movie={movie_details}
                     backdropImgUrl={backdropImgUrl}
                     onAddClick={() => this.onAddClick(movie_details)}
                   />
@@ -67,9 +68,6 @@ class Movie extends Component {
               </div>
               <Col md={16}>
                 <div className="movie-info">
-                  <Title level={2} id="title">
-                    {movie_details.title}
-                  </Title>
                   <Button onClick={this.onPrevClick}>
                     <Icon type="left" />
                     Main Page
