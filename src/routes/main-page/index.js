@@ -1,17 +1,19 @@
 // React
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 
 // Custom
 import Header from "./organisms/Header";
 import MovieList from "./organisms/MovieList";
+import { MovieContext } from "./../../context/MovieContext";
 
 // Third-party
 
-const MainPage = () => {
+const MainPage = props => {
+  const { movies } = useContext(MovieContext);
   return (
     <Fragment>
       <Header />
-      <MovieList />
+      <MovieList items={movies} />
     </Fragment>
   );
 };
