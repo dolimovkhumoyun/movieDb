@@ -1,7 +1,19 @@
-import React from "react";
+// React
+import React, { Fragment } from "react";
+
+// Custom
+import Header from "./organisms/Header";
+import MovieList from "./organisms/MovieList";
+
+// Third-party
 
 const MainPage = () => {
-  return <h1>Main PAge</h1>;
+  return (
+    <Fragment>
+      <Header />
+      <MovieList />
+    </Fragment>
+  );
 };
 
 export default MainPage;
