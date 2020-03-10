@@ -5,6 +5,7 @@ import React, { Fragment, useContext } from "react";
 import Header from "./organisms/Header";
 import MovieList from "./organisms/MovieList";
 import { MovieContext } from "./../../context/MovieContext";
+import Paging from "./organisms/Pagination";
 
 // Third-party
 
@@ -14,6 +15,7 @@ const MainPage = props => {
     <Fragment>
       <Header />
       <MovieList items={movies} />
+      <Paging />
     </Fragment>
   );
 };

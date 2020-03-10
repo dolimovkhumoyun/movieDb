@@ -1,9 +1,13 @@
-export const movieReducer = (state, action) => {
-  switch (action.type) {
-    case "ADD_BOOK":
-      return [...state, action.state];
-    case "REMOVE_BOOK":
-      return state.filter(book => book.id !== action.id);
+import { GET_MOVIES, FETCHING, SUCCESS, ERROR } from "./../constants/action";
+
+export const movieReducer = (state = [], { type, response }) => {
+  switch (type) {
+    case `${GET_MOVIES}_${FETCHING}`:
+      return { ...state, isFetching: true };
+    case `${GET_MOVIES}_${SUCCESS}`:
+      return { ...state, isFetching: false, response: response.data };
+    case `${GET_MOVIES}_${ERROR}`:
+      return { ...state, isFetching: false, response: response.data };
     default:
       return state;
   }
