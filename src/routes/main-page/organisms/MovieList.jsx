@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import MovieCard from "./../molecules/MovieCard";
 import { MovieContext } from "./../../../context/MovieContext";
-
-// const tmp = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 18, 19];
+import ListLoading from "./ListLoading";
 
 const MovieList = ({ items }) => {
   const { genres } = useContext(MovieContext);
@@ -17,7 +16,7 @@ const MovieList = ({ items }) => {
         ))}
       </div>
     );
-  } else return false;
+  } else return <ListLoading />;
 };
 
 export default MovieList;

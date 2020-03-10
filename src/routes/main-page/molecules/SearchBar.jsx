@@ -3,12 +3,12 @@ import { Input } from "antd";
 
 const { Search } = Input;
 
-const Searchbar = () => {
+const Searchbar = ({ onClick }) => {
   return (
     <Search
       placeholder="type name of the movie"
       style={{ marginTop: 20 }}
-      onSearch={value => console.log(value)}
+      onSearch={onClick}
     />
   );
 };

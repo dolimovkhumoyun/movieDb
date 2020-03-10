@@ -1,13 +1,16 @@
 import React from "react";
 import find from "lodash/find";
-import { Tag, Rate, Tooltip } from "antd";
+import { Tag, Rate, Button, Tooltip } from "antd";
+import { tagColor } from "./../../../constants/coolors";
+
+import { PlusOutlined } from "@ant-design/icons";
 
 const MovieCard = ({ item, genres }) => {
   const renderGenres = id => {
     if (!genres.isFetching) {
       let tmpGenre = find(genres.response.genres, { id: id });
       let tags = (
-        <Tag color="magenta" className="m-1" key={tmpGenre.name + id}>
+        <Tag color={tagColor[id % 10]} className="m-1" key={tmpGenre.name + id}>
           {tmpGenre.name}
         </Tag>
       );
@@ -24,7 +27,11 @@ const MovieCard = ({ item, genres }) => {
         <div className="col-md-6">
           <img
             className="card-img-top img-responsive"
-            src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
+            src={
+              item.poster_path !== null
+                ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
+                : "https://via.placeholder.com/300x270"
+            }
             alt="Card_image_cap"
           />
         </div>
@@ -35,6 +42,9 @@ const MovieCard = ({ item, genres }) => {
             </p>
             <p className="card-text">{item.release_date}</p>
             {item.genre_ids.map(id => renderGenres(id))}
+            <Tooltip title="Add to my list">
+              <Button type="circle" icon={<PlusOutlined />} size="large" />
+            </Tooltip>
             <Rate
               disabled
               defaultValue={2}

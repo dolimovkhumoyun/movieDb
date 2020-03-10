@@ -7,12 +7,12 @@ import Searchbar from "./../molecules/SearchBar";
 // Third-party
 import { Row, Col } from "antd";
 
-const Header = () => {
+const Header = ({ onClick }) => {
   return (
     <Fragment>
       <Row>
         <Col span="6" offset="9">
-          <Searchbar />
+          <Searchbar onClick={onClick} />
         </Col>
       </Row>
     </Fragment>

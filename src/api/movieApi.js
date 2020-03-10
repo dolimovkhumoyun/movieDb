@@ -24,6 +24,14 @@ export const getGenres = async dispatch => {
   });
 };
 
+export const searchMovie = async (dispatch, input) => {
+  let api_url = `${url}/search/movie/?api_key=${key}&query=${input}`;
+  makeRequest(api_url, dispatch, GET_MOVIES, {
+    verb: "get",
+    params: {}
+  });
+};
+
 export const makeRequest = async (
   url,
   dispatch,

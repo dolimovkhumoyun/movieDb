@@ -11,7 +11,9 @@ import { Switch, Route } from "react-router-dom";
 const AsyncMainPage = Loadable({
   loader: () => import("../../../routes/main-page"),
   loading() {
-    return <Spin />;
+    return (
+      <Spin size="large" style={{ marginLeft: "50%", marginTop: "20%" }} />
+    );
   }
 });
 
