@@ -35,7 +35,11 @@ const MovieCard = ({ item, genres }) => {
             </p>
             <p className="card-text">{item.release_date}</p>
             {item.genre_ids.map(id => renderGenres(id))}
-            <Rate disabled defaultValue={2} />
+            <Rate
+              disabled
+              defaultValue={2}
+              style={{ position: "absolute", bottom: "10px", left: "20px" }}
+            />
           </div>
         </div>
       </div>

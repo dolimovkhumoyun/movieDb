@@ -6,8 +6,9 @@ const url = "https://api.themoviedb.org/3";
 const key = "06aa50e38281dd9b38543df33f8bab2c";
 // const mustVars = `language=en-US&api_key=${key}`; // language + authentication key
 
-export const getMovies = dispatch => {
-  let api_url = url + `/movie/popular?language=en-US&api_key=${key}&page=0$`;
+export const getMovies = (dispatch, page) => {
+  let api_url =
+    url + `/movie/popular?language=en-US&api_key=${key}&page=${page}`;
   makeRequest(api_url, dispatch, GET_MOVIES, {
     verb: "get",
     params: {}

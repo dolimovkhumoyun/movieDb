@@ -1,6 +1,6 @@
 import { FETCHING, SUCCESS, ERROR } from "./../constants/action";
 
-export const fetching = TYPE => ({ type: `${TYPE}_${FETCHING}` });
+export const fetching = TYPE => ({ type: `${TYPE}_${FETCHING}`, response: [] });
 export const success = (TYPE, response) => ({
   type: `${TYPE}_${SUCCESS}`,
   response
