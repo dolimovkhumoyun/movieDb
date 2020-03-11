@@ -22,10 +22,14 @@ const MainPage = props => {
   const onPageClick = page => {
     getMovies(dispatch, page);
   };
+
+  const onCardClick = movie_id => {
+    props.history.push(`movie/${movie_id}`);
+  };
   return (
     <Fragment>
       <Header onClick={onSearchClick} />
-      <MovieList items={movies} />
+      <MovieList items={movies} onCardClick={onCardClick} />
       <Paging data={movies} onClick={onPageClick} />
     </Fragment>
   );

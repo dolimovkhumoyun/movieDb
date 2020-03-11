@@ -5,7 +5,7 @@ import { tagColor } from "./../../../constants/coolors";
 
 import { PlusOutlined } from "@ant-design/icons";
 
-const MovieCard = ({ item, genres }) => {
+const MovieCard = ({ item, genres, onCardClick }) => {
   const renderGenres = id => {
     if (!genres.isFetching) {
       let tmpGenre = find(genres.response.genres, { id: id });
@@ -22,7 +22,7 @@ const MovieCard = ({ item, genres }) => {
     return string.length > 15 ? string.substr(0, 15 - 1) + "..." : string;
   };
   return (
-    <div className="card shadow-sm">
+    <div className="card shadow-sm" onClick={() => onCardClick(item.id)}>
       <div className="row">
         <div className="col-md-6">
           <img
@@ -45,11 +45,7 @@ const MovieCard = ({ item, genres }) => {
             <Tooltip title="Add to my list">
               <Button type="circle" icon={<PlusOutlined />} size="large" />
             </Tooltip>
-            <Rate
-              disabled
-              defaultValue={2}
-              style={{ position: "absolute", bottom: "10px", left: "20px" }}
-            />
+            <Rate disabled defaultValue={2} style={{ position: "absolute", bottom: "10px", left: "20px" }} />
           </div>
         </div>
       </div>

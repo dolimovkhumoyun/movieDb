@@ -3,7 +3,7 @@ import MovieCard from "./../molecules/MovieCard";
 import { MovieContext } from "./../../../context/MovieContext";
 import ListLoading from "./ListLoading";
 
-const MovieList = ({ items }) => {
+const MovieList = ({ items, onCardClick }) => {
   const { genres } = useContext(MovieContext);
   if (!items.isFetching) {
     const { results } = items.response;
@@ -11,7 +11,7 @@ const MovieList = ({ items }) => {
       <div className="row card-deck">
         {results.map((item, index) => (
           <div className="col-lg-4 col-md-6 col-sm-6 mt-4" key={index}>
-            <MovieCard item={item} genres={genres} />
+            <MovieCard item={item} genres={genres} onCardClick={onCardClick} />
           </div>
         ))}
       </div>

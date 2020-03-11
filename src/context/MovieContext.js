@@ -1,16 +1,20 @@
 import React, { createContext, useReducer, useEffect } from "react";
-import { movieReducer } from "./../reducers/movieReducer";
 import { getMovies, getGenres } from "./../api/movieApi";
+import { moviesReducer } from "../reducers/moviesReducer";
 import { genreReducer } from "./../reducers/genreReducer";
+import { movieReducer } from "../reducers/movieReducer";
 
 export const MovieContext = createContext();
 
 const MovieContextProvider = props => {
-  const [movies, dispatch] = useReducer(movieReducer, [], () => {
+  const [movies, dispatch] = useReducer(moviesReducer, [], () => {
     return [];
   });
   const [genres, genreDispatch] = useReducer(genreReducer, [], () => {
     return [];
+  });
+  const [movie, movieDispatch] = useReducer(movieReducer, [], () => {
+    return { isFetching: true };
   });
 
   useEffect(() => {
@@ -19,7 +23,7 @@ const MovieContextProvider = props => {
   }, []);
 
   return (
-    <MovieContext.Provider value={{ movies, genres, dispatch }}>
+    <MovieContext.Provider value={{ movies, movie, genres, dispatch, movieDispatch }}>
       {props.children}
     </MovieContext.Provider>
   );

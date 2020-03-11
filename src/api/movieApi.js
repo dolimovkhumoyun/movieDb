@@ -4,11 +4,10 @@ import { success, fetching, error } from "../actions";
 
 const url = "https://api.themoviedb.org/3";
 const key = "06aa50e38281dd9b38543df33f8bab2c";
-// const mustVars = `language=en-US&api_key=${key}`; // language + authentication key
+const mustVars = `language=en-US&api_key=${key}`; // language + authentication key
 
 export const getMovies = (dispatch, page) => {
-  let api_url =
-    url + `/movie/popular?language=en-US&api_key=${key}&page=${page}`;
+  let api_url = url + `/movie/popular?language=en-US&api_key=${key}&page=${page}`;
   makeRequest(api_url, dispatch, GET_MOVIES, {
     verb: "get",
     params: {}
@@ -32,12 +31,15 @@ export const searchMovie = async (dispatch, input) => {
   });
 };
 
-export const makeRequest = async (
-  url,
-  dispatch,
-  type,
-  { verb = "get", params = {} } = {}
-) => {
+export const getMovie = async (dispatch, movie_id) => {
+  let api_url = url + `/movie/${movie_id}?${mustVars}`;
+  makeRequest(api_url, dispatch, GET_MOVIES, {
+    verb: "get",
+    params: {}
+  });
+};
+
+export const makeRequest = async (url, dispatch, type, { verb = "get", params = {} } = {}) => {
   dispatch(fetching(type));
   try {
     const response = await axios[verb](url, params);
