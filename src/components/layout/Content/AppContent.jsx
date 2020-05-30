@@ -1,8 +1,6 @@
 // React
 import React from "react";
 
-// Custom
-
 // Third-party
 import { Spin } from "antd";
 import Loadable from "react-loadable";
@@ -11,17 +9,15 @@ import { Switch, Route } from "react-router-dom";
 const AsyncMainPage = Loadable({
   loader: () => import("../../../routes/main-page"),
   loading() {
-    return (
-      <Spin size="large" style={{ marginLeft: "50%", marginTop: "20%" }} />
-    );
-  }
+    return <Spin size="large" style={{ marginLeft: "50%", marginTop: "20%" }} />;
+  },
 });
 
 const AsyncMovieDetails = Loadable({
   loader: () => import("../../../routes/movie-details"),
   loading() {
     return <Spin />;
-  }
+  },
 });
 
 const AppContent = () => {
