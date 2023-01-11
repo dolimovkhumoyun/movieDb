@@ -8,7 +8,7 @@
     "@bit/dolimovkhumoyun.form_test.form": "0.0.3",
     "antd": "^3.26.7",
     "axios": "^0.19.1",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.15",
     "node-sass": "^4.13.0",
     "react": "^16.12.0",
